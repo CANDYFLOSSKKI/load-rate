@@ -1,0 +1,21 @@
+server:
+  port: 11059
+spring:
+  application:
+    name: load-device
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 101.200.195.175:8848
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://101.200.195.175:3306/test?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: xiaocaozhou2016
+    type: com.alibaba.druid.pool.DruidDataSource
+  rabbitmq:
+    host: 101.200.195.175
+    port: 5672
+    virtual-host: /
+    username: root
+    password: xiaocaozhou2016

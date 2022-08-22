@@ -1,0 +1,28 @@
+server:
+  port: 11060
+
+spring:
+  application:
+    name: load-message
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 101.200.195.175:8848
+  redis:
+    host: 101.200.195.175
+    port: 6379
+    password: xiaocaozhou2016
+    database: 1
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: 100
+
+  rabbitmq:
+     host: 101.200.195.175
+     port: 5672
+     virtual-host: /
+     username: root
+     password: xiaocaozhou2016

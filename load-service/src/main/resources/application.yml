@@ -1,0 +1,17 @@
+server:
+  port: 11061
+spring:
+  application:
+    name: load-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 101.200.195.175:8848
+ribbon:
+  eager-load:
+    enabled: true
+feign:
+  httpclient:
+    enabled: true
+    max-connections: 200
+    max-connections-per-route: 50

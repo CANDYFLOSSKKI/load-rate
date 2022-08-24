@@ -14,6 +14,7 @@ import java.util.Map;
 public class DeviceStatusResponse {
     private String name;
     private String version;
+    private String unit;
     private Double ratedPower;
     private Double nowPower;
     private Double nowLoadRate;

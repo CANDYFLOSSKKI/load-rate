@@ -20,12 +20,8 @@ public class DeviceMonitorUtils {
         String[] strPartDate=strPartDateAndTime[0].split("-");
         LocalDate date=LocalDate.of(Integer.parseInt(strPartDate[0]),Integer.parseInt(strPartDate[1]),Integer.parseInt(strPartDate[2]));
         LocalTime time;
-        if(strPartDateAndTime[1].contains(":")){
-            String[] strPartTime=strPartDateAndTime[1].split(":");
-            time=LocalTime.of(Integer.parseInt(strPartTime[0]),Integer.parseInt(strPartTime[1]),0);
-        }else{
-            time=LocalTime.of(Integer.parseInt(strPartDateAndTime[1]),0,0);
-        }
+        String[] strPartTime=strPartDateAndTime[1].split(":");
+        time=LocalTime.of(Integer.parseInt(strPartTime[0]),Integer.parseInt(strPartTime[1]),Integer.parseInt(strPartTime[2]));
         return LocalDateTime.of(date,time);
     }
 }

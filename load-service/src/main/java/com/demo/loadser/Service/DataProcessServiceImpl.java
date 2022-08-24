@@ -4,12 +4,11 @@ import com.demo.loadser.Feign.DeviceClassServiceClient;
 import com.demo.loadser.Feign.DeviceMonitorServiceClient;
 import com.demo.loadser.Feign.DeviceObjectServiceClient;
 import com.demo.loadser.RespEntity.DeviceClass;
-import com.demo.loadser.RespEntity.DeviceClassAndObjectBranch;
+import com.demo.loadser.RespEntity.DeviceStatus.DeviceClassAndObjectBranch;
 import com.demo.loadser.RespEntity.DeviceObject;
 import com.demo.loadser.RespEntity.DeviceStatus.DeviceStatusRequest;
 import com.demo.loadser.RespEntity.DeviceStatus.DeviceStatusResponse;
-import com.fasterxml.jackson.datatype.jsr310.deser.DurationDeserializer;
-import com.google.common.collect.Maps;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,6 +27,8 @@ public class DataProcessServiceImpl implements DataProcessService{
     private DeviceMonitorServiceClient deviceMonitorServiceClient;
 
     private static final DecimalFormat DecimalFormatter=new DecimalFormat(".##");
+    private static final String[] UnitArray=new String[]{"KW","W"};
+    private static final ObjectMapper mapper=new ObjectMapper();
 
     private static final Comparator<LocalDateTime> LdtComparator= (o1, o2) -> {
         if      (o1.isAfter(o2)) { return 1;  }
@@ -57,18 +58,19 @@ public class DataProcessServiceImpl implements DataProcessService{
         DeviceStatusResponse resp=new DeviceStatusResponse();
         DeviceObject targetObj=deviceObjectServiceClient.getDeviceObject(req.getName());
         Map<LocalDateTime,Double> dataMap=deviceMonitorServiceClient.getMonitorData(targetObj.getName());
-        for(Map.Entry<LocalDateTime,Double> entry:dataMap.entrySet()){
-            if(entry.getKey().isBefore(req.getFromTime())||entry.getKey().isAfter(req.getToTime())){
-                dataMap.remove(entry.getKey());
+        Map<LocalDateTime,Double> targetMap=new TreeMap<>(LdtComparator);
+        for(LocalDateTime ldt:dataMap.keySet()){
+            if(!(ldt.isBefore(req.getFromTime())||ldt.isAfter(req.getToTime()))){
+                targetMap.put(ldt,dataMap.get(ldt));
             }
         }
-        Map<LocalDateTime,Double> targetMap=new TreeMap<>(LdtComparator);
-        targetMap.putAll(dataMap);
-
+        if(targetMap.isEmpty()){
+            return null;
+        }
         resp.setName(req.getName());
         resp.setVersion(targetObj.getVersion());
+        resp.setUnit(UnitArray[0]);
         resp.setRatedPower(Double.parseDouble(DecimalFormatter.format(targetObj.getRatedpower())));
-        resp.setLoadRateLine(targetMap);
         LocalDateTime nowPowerKey=targetMap.keySet().stream().max(LdtComparator).get();
         resp.setNowPower(Double.parseDouble(DecimalFormatter.format(targetMap.get(nowPowerKey))));
         resp.setNowLoadRate(Double.parseDouble(DecimalFormatter.format(resp.getNowPower()/resp.getRatedPower())));
@@ -87,6 +89,8 @@ public class DataProcessServiceImpl implements DataProcessService{
         resp.setAvgPower1h(Double.parseDouble(DecimalFormatter.format(avg1hPower/avg1hNum)));
         resp.setMaxPower1h(Double.parseDouble(DecimalFormatter.format(max1hPower)));
         resp.setAvgPower24h(Double.parseDouble(DecimalFormatter.format(avg24hPower/avg24hNum)));
+        targetMap.replaceAll((l, v) -> Double.valueOf(DecimalFormatter.format(targetMap.get(l) / resp.getRatedPower())));
+        resp.setLoadRateLine(targetMap);
         return resp;
     }
 }

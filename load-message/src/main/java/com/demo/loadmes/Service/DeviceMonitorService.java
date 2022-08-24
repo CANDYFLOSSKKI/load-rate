@@ -11,7 +11,7 @@ public interface DeviceMonitorService {
     void stopMonitorService();
 
     void scheduledMonitor();
-    void scheduledMonitorEnd();
+    void scheduledMonitorChangePower();
     void scheduledMonitorReduce(String deviceName);
 
     Map<LocalDateTime, Double> getDeviceMonitorData(String deviceName);

@@ -8,4 +8,6 @@ load-message：设备负荷率监控任务
 
 load-service：暴露服务接口
 
-本项目为工作需要，待补全
+load-search：具体设备ES搜索(待补)
+
+本项目仅工作需要

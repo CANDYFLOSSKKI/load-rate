@@ -1,8 +1,8 @@
 package com.demo.loaddev.Service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.demo.loaddev.Entity.Table.DeviceClass;
-import com.demo.loaddev.Entity.DeviceClassDoc;
+import com.demo.loaddev.TableEntity.DeviceClass;
+import com.demo.loaddev.TableEntity.DeviceClassDoc;
 
 import java.util.List;
 

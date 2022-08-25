@@ -1,11 +1,11 @@
 package com.demo.loadser.Controller;
 
-import com.demo.loadser.RespEntity.DeviceStatus.DeviceClassAndObjectBranch;
-import com.demo.loadser.RespEntity.DeviceStatus.DeviceStatusRequest;
-import com.demo.loadser.RespEntity.DeviceStatus.DeviceStatusRequestStrPattern;
-import com.demo.loadser.RespEntity.DeviceStatus.DeviceStatusResponse;
-import com.demo.loadser.Service.DataProcessService;
-import com.demo.loadser.Service.DeviceTimeFormatter;
+import com.demo.loadser.RespDeviceInfoEntity.DeviceClassAndObjectBranch;
+import com.demo.loadser.RespDeviceInfoEntity.DeviceStatusRequest;
+import com.demo.loadser.RespDeviceInfoEntity.DeviceStatusRequestStrPattern;
+import com.demo.loadser.RespDeviceInfoEntity.DeviceStatusResponse;
+import com.demo.loadser.Service.DeviceInfoProcessService;
+import com.demo.loadser.UtilPack.DeviceTimeFormatter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 public class DeviceMonitorServiceController {
     @Resource
-    private DataProcessService service;
+    private DeviceInfoProcessService service;
 
     @GetMapping("/device/get")
     public List<DeviceClassAndObjectBranch> getDeviceBranchList(){

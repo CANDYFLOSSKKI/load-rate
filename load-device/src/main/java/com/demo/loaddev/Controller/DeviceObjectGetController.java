@@ -1,7 +1,7 @@
 package com.demo.loaddev.Controller;
 
-import com.demo.loaddev.Entity.Table.DeviceClass;
-import com.demo.loaddev.Entity.Table.DeviceObject;
+import com.demo.loaddev.TableEntity.DeviceClass;
+import com.demo.loaddev.TableEntity.DeviceObject;
 import com.demo.loaddev.Service.DeviceObjectService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,0 +1,16 @@
+server:
+  port: 11062
+
+spring:
+  application:
+    name: load-search
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 101.200.195.175:8848
+  rabbitmq:
+    host: 101.200.195.175
+    port: 5672
+    virtual-host: /
+    username: root
+    password: xiaocaozhou2016

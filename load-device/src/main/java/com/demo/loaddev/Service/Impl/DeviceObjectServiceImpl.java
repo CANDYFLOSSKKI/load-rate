@@ -2,13 +2,13 @@ package com.demo.loaddev.Service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.demo.loaddev.Entity.*;
-import com.demo.loaddev.Entity.Table.DeviceClass;
-import com.demo.loaddev.Entity.Table.DeviceObject;
-import com.demo.loaddev.Mapper.DeviceObjectMapper;
-import com.demo.loaddev.Message.MessageService;
+import com.demo.loaddev.Message.MessageService.DeviceMonitorMessageService;
 import com.demo.loaddev.Service.DeviceClassService;
 import com.demo.loaddev.Service.DeviceObjectService;
+import com.demo.loaddev.TableEntity.*;
+import com.demo.loaddev.TableEntity.DeviceClass;
+import com.demo.loaddev.TableEntity.DeviceObject;
+import com.demo.loaddev.Mapper.DeviceObjectMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,7 +20,7 @@ public class DeviceObjectServiceImpl extends ServiceImpl<DeviceObjectMapper, Dev
     private DeviceObjectMapper mapper;
 
     @Resource
-    private MessageService messageService;
+    private DeviceMonitorMessageService deviceMonitorMessageService;
 
     @Resource
     private DeviceClassService deviceClassService;
@@ -28,12 +28,12 @@ public class DeviceObjectServiceImpl extends ServiceImpl<DeviceObjectMapper, Dev
     @Override
     public void addDeviceObject(DeviceObjectDoc doc) {
         mapper.insert(new DeviceObject(doc));
-        messageService.addDeviceMonitor(doc.getName());
+        deviceMonitorMessageService.addDeviceMonitor(doc.getName());
     }
 
     @Override
     public void delDeviceObject(Integer id) {
-        messageService.delDeviceMonitor(getDeviceObject(id).getName());
+        deviceMonitorMessageService.delDeviceMonitor(getDeviceObject(id).getName());
         mapper.deleteById(id);
     }
 

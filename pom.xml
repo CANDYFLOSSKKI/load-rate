@@ -18,6 +18,7 @@
         <module>load-message</module>
         <module>load-device</module>
         <module>load-service</module>
+        <module>load-search</module>
     </modules>
     <properties>
         <java.version>17</java.version>

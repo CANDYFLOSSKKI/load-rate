@@ -2,14 +2,13 @@ package com.demo.loaddev.Service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.demo.loaddev.Entity.Table.DeviceClass;
-import com.demo.loaddev.Entity.DeviceClassDoc;
-import com.demo.loaddev.Mapper.DeviceClassMapper;
 import com.demo.loaddev.Service.DeviceClassService;
+import com.demo.loaddev.TableEntity.DeviceClass;
+import com.demo.loaddev.TableEntity.DeviceClassDoc;
+import com.demo.loaddev.Mapper.DeviceClassMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

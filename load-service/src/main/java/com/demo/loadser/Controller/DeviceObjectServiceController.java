@@ -1,9 +1,9 @@
 package com.demo.loadser.Controller;
 
 
-import com.demo.loadser.Feign.DeviceObjectServiceClient;
-import com.demo.loadser.RespEntity.DeviceObject;
-import com.demo.loadser.RespEntity.DeviceObjectDoc;
+import com.demo.loadser.OpenFeignClient.DeviceObjectServiceClient;
+import com.demo.loadser.RecvEntity.DeviceObject;
+import com.demo.loadser.RecvEntity.DeviceObjectDoc;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
